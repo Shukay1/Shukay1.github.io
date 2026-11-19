@@ -64,6 +64,37 @@
 @keyframes nebulaBreath{from{opacity:.44;transform:translate3d(-12px,10px,0) scale(.88)}to{opacity:.9;transform:translate3d(18px,-15px,0) scale(1.15)}}
 @media(max-width:700px){#galaxyGlows .nebula-glow{opacity:.5;filter:blur(25px)}}
 @media(prefers-reduced-motion:reduce){#galaxyGlows .nebula-glow{animation:none}}
+</style><style id="mobile-cosmic-experience">
+/* Mobile keeps the same cinematic galaxy instead of reducing it to a flat background. */
+@media(max-width:700px){
+html,body{max-width:100%;overflow-x:clip}
+#cosmicSky{opacity:1!important}
+#galaxyGlows .nebula-glow{opacity:.83!important;filter:blur(13px)!important;animation-duration:16s}
+#galaxyGlows .nebula-glow:nth-child(1){left:-35%;top:2%;width:85vw;height:85vw}
+#galaxyGlows .nebula-glow:nth-child(2){left:38%;top:10%;width:72vw;height:72vw}
+#galaxyGlows .nebula-glow:nth-child(3){right:-42%;top:36%;width:90vw;height:90vw}
+#galaxyGlows .nebula-glow:nth-child(4){left:-32%;top:58%;width:90vw;height:90vw}
+#galaxyGlows .nebula-glow:nth-child(5){right:-30%;bottom:-12%;width:90vw;height:90vw}
+#galaxyGlows .nebula-glow:nth-child(6){left:14%;top:27%;width:62vw;height:62vw}
+#fx{opacity:.9!important}
+.hero{min-height:calc(100svh - 80px);padding-top:65px;padding-bottom:115px;isolation:isolate}
+.hero-orb{width:112vw!important;right:-53%!important;top:6%!important;opacity:.76!important;filter:drop-shadow(0 0 30px #ddbd8250)}
+.orb-ring{width:145vw!important;right:-74%!important;top:4%!important;opacity:.8}
+.hero h1{position:relative;z-index:2;font-size:clamp(56px,14.3vw,96px);line-height:.94;overflow-wrap:normal}
+.hero-sub{position:relative;z-index:2}
+.hero-sub p{max-width:340px;text-shadow:0 2px 12px #000}
+#astro{width:clamp(92px,26vw,130px)!important;height:auto!important;aspect-ratio:260/380;right:0!important;top:48%!important;opacity:.95!important;filter:drop-shadow(0 0 18px #9bc7ff55) drop-shadow(0 10px 18px #000c)}
+#starship{width:clamp(135px,39vw,200px)!important;right:5%!important;top:26%!important;opacity:.85!important}
+.cosmic-planet.one{width:clamp(90px,25vw,135px);height:auto;aspect-ratio:1;right:1%;top:14%}
+.cosmic-planet.two{opacity:.85}.cosmic-planet.three{opacity:.9}
+.nav{position:relative;z-index:100}
+.navlinks.open{z-index:101;box-shadow:0 20px 55px #000b;backdrop-filter:blur(20px);background:#10131af0}
+.ticker{z-index:4}
+.project,.project-visual{overflow:hidden}
+.cta{max-width:100%;white-space:normal}
+}
+@media(max-width:390px){.hero h1{font-size:clamp(49px,13.8vw,65px)}.hero-sub p{font-size:14px}.hero-orb{top:9%!important}.hero{padding-top:52px}#astro{top:52%!important}}
+@media(prefers-reduced-motion:reduce){#galaxyGlows .nebula-glow{animation:none!important}}
 </style></head><body><div id="cosmicSky" aria-hidden="true"><div class="cosmic-planet one"></div><div class="cosmic-planet two"></div><div class="cosmic-planet three"></div></div><div id="astro" aria-label="Интерактивный космонавт" role="img"><svg viewBox="0 0 260 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="suitReal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".24" stop-color="#d8dee3"/><stop offset=".53" stop-color="#8996a6"/><stop offset=".77" stop-color="#e9e9e7"/><stop offset="1" stop-color="#556478"/></linearGradient><linearGradient id="darkMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d6e2ee"/><stop offset=".4" stop-color="#344052"/><stop offset=".65" stop-color="#0c1826"/><stop offset="1" stop-color="#d8d3c7"/></linearGradient><radialGradient id="helmetGlass" cx=".33" cy=".24" r=".86"><stop stop-color="#e3e2bd"/><stop offset=".13" stop-color="#657e8d"/><stop offset=".3" stop-color="#1b3b53"/><stop offset=".65" stop-color="#07131f"/><stop offset="1" stop-color="#02050b"/></radialGradient><linearGradient id="goldRim"><stop stop-color="#6e604c"/><stop offset=".26" stop-color="#f5e1a8"/><stop offset=".65" stop-color="#b78f56"/><stop offset="1" stop-color="#4c433e"/></linearGradient><filter id="grainSuit"><feTurbulence type="fractalNoise" baseFrequency=".4" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter><filter id="softGlow"><feGaussianBlur stdDeviation="4"/></filter></defs>
 <g id="astroBody" transform="rotate(-8 130 195)">
 <rect x="83" y="132" width="108" height="135" rx="32" fill="#66717e" stroke="#dce1e4" stroke-width="7"/>
