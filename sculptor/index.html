@@ -94,6 +94,30 @@
 .team-spotlight{left:55%!important}
 @media(max-width:950px){.team-biography{left:3%;top:29%;width:28%}.team-spotlight{left:57%!important}}
 @media(max-width:650px){.team-world{height:850px!important}.team-spotlight{left:50%!important;top:31%!important}.team-biography{left:6%;right:6%;top:59%;width:auto;max-height:24%;text-align:left;z-index:9;overflow:auto}.bio-rule{margin:10px 0}.team-biography h3{font-size:25px;margin:6px 0 8px}.team-biography p{font-size:11px;line-height:1.55}.bio-index{display:none}.team-controls{bottom:12px}.team-counter{top:10px}}
+
+/* Mobile constellation: tilted elliptical ring, portrait in foreground, clear biography below. */
+.team-spotlight{z-index:8!important}
+.orbit-cluster{z-index:5}
+@media(max-width:650px){
+ .team-world{height:860px!important;max-height:none!important;min-height:860px!important;touch-action:pan-y}
+ .team-spotlight{left:50%!important;top:228px!important;width:76%!important;z-index:8!important}
+ .spotlight-photo{height:335px!important;width:250px!important;max-width:85vw!important}
+ .spotlight-caption{display:none!important}
+ .spotlight-back{display:none!important}
+ .orbit-cluster{z-index:5!important}
+ .orbit-person{width:72px!important;height:88px!important;border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important;mask-image:radial-gradient(ellipse 76% 74% at 50% 45%,black 48%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 76% 74% at 50% 45%,black 48%,transparent 100%)}
+ .orbit-person span{bottom:5px;left:7px;background:transparent!important;font-size:10px;text-shadow:0 1px 5px #000}
+ .orbit-person.selected{border:0!important;box-shadow:none!important}
+ .orbit-rings{top:100px!important;bottom:auto!important;height:610px!important;transform:rotate(-22deg) scaleY(.64);opacity:.65}
+ .team-biography{position:absolute!important;left:7%!important;right:7%!important;top:600px!important;width:auto!important;max-height:170px!important;overflow-y:auto!important;z-index:12!important;text-align:left!important;background:linear-gradient(90deg,#0c100deb 0%,#0c100dcf 82%,transparent);padding:14px 8px 8px!important;border-left:2px solid #ff5a28;pointer-events:auto!important}
+ .bio-label{font-size:9px!important}
+ .bio-rule{margin:7px 0!important;width:38px!important}
+ .team-biography h3{font-size:26px!important;margin:7px 0 10px!important}
+ .team-biography p{font-size:12px!important;line-height:1.5!important}
+ .team-biography #bioRole{font-size:9px!important}
+ .team-controls{bottom:18px!important;z-index:13!important}
+ .team-counter{bottom:27px!important;right:12px!important;font-size:25px!important}
+}
 </style></head><body>
 <div class="topline" id="progress"></div>
 <header class="nav"><a class="brand" href="#">SCULPTOR<small>ELITE GYM</small></a><button class="hamb" id="hamb" aria-label="Открыть меню">☰</button><nav class="nav-links" id="navlinks"><a href="#about">О клубе</a><a href="#gallery">Пространство</a><a href="#prices">Абонементы</a><a href="#team">Команда</a><a href="#contact" class="pill">Связаться ↗</a></nav></header>
@@ -140,7 +164,7 @@ for(let i=0;i<n;i++){
 }
 if(nearest!==selected)select(nearest);
 }
-function draw(){rotation+=(targetRotation-rotation)*.12;if(manualRotation)syncNearest();const w=stage.clientWidth,h=stage.clientHeight,small=w<650,rx=w*(small?.42:.41),ry=small?205:Math.min(295,h*.35);dots.forEach((b,i)=>{const angle=(i/dots.length)*Math.PI*2+rotation-Math.PI/2;const x=Math.cos(angle)*rx,y=Math.sin(angle)*ry;const depth=(Math.sin(angle)+1)/2;const scale=(small?.68:.72)+depth*(small?.35:.48);b.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) scale(${scale})`;b.style.zIndex=String(2+Math.round(depth*10));b.style.opacity=String(.46+depth*.54)});if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(draw)}
+function draw(){rotation+=(targetRotation-rotation)*.12;if(manualRotation)syncNearest();const w=stage.clientWidth,h=stage.clientHeight,small=w<650,rx=w*(small?.42:.41),ry=small?205:Math.min(295,h*.35);dots.forEach((b,i)=>{const angle=(i/dots.length)*Math.PI*2+rotation-Math.PI/2;const x=Math.cos(angle)*rx,y=small?(Math.sin(angle)*105-Math.cos(angle)*53-18):Math.sin(angle)*ry;const depth=(Math.sin(angle)+1)/2;const scale=(small?.68:.72)+depth*(small?.35:.48);b.style.transform=`translate(-50%,-50%) translate(${x}px,${y}px) scale(${scale})`;b.style.zIndex=String(2+Math.round(depth*3));b.style.opacity=String(.46+depth*.54)});if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(draw)}
 dots.forEach((b,i)=>b.addEventListener('click',()=>{if(!dragged)select(i)}));document.getElementById('teamPrev').addEventListener('click',()=>{targetRotation+=Math.PI*2/dots.length;manualRotation=true;select(selected-1)});document.getElementById('teamNext').addEventListener('click',()=>{targetRotation-=Math.PI*2/dots.length;manualRotation=true;select(selected+1)});
 stage.addEventListener('pointerdown',e=>{if(e.target.closest('.team-controls'))return;drag=true;dragged=false;dragX=e.clientX;dragStart=e.clientX;activePointer=e.pointerId});
 window.addEventListener('pointermove',e=>{if(!drag||activePointer!==e.pointerId)return;let delta=e.clientX-dragX;if(Math.abs(e.clientX-dragStart)>7)dragged=true;if(dragged){targetRotation+=delta*.008;manualRotation=true;dragX=e.clientX}});
