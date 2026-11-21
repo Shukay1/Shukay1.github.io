@@ -13,8 +13,32 @@
 <a class="back" href="index.html">Все разделы</a>
 <h1>Написать в поддержку</h1>
 <section><h2>Чем мы можем помочь?</h2><p>Не получается войти, что-то не работает или есть вопрос о Menly? Напишите нам и коротко расскажите, чем помочь.</p></section>
-<section><h2>Почта поддержки</h2><p><a href="mailto:menly.support@gmail.com?subject=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%20Menly">Написать письмо</a></p><p>Если почтовое приложение не открылось, скопируйте адрес <strong>menly.support@gmail.com</strong>.</p></section>
+<section>
+<details class="support-request">
+  <summary>Написать письмо</summary>
+  <form id="support-form" action="mailto:menly.support@gmail.com" method="post" enctype="text/plain">
+    <label for="support-topic">Тема обращения</label>
+    <select id="support-topic" name="topic" required>
+      <option value="">Выберите тему</option>
+      <option>Вход и аккаунт</option>
+      <option>Ошибка в приложении</option>
+      <option>Жалоба</option>
+      <option>Конфиденциальность и данные</option>
+      <option>Предложение</option>
+      <option>Другой вопрос</option>
+    </select>
+    <label for="support-email">Почта для ответа</label>
+    <input id="support-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+    <label for="support-description">Что случилось?</label>
+    <textarea id="support-description" name="description" rows="5" maxlength="1000" required></textarea>
+    <p>Откроется черновик. Нажмите «Отправить» в почтовом приложении.</p>
+    <button type="submit">Открыть черновик письма</button>
+  </form>
+</details>
+<p class="support-address">Можно также написать напрямую на <a href="mailto:menly.support@gmail.com">menly.support@gmail.com</a>.</p>
+</section>
 </main>
 <footer><nav class="wrap" aria-label="Документы Menly"><a href="community-rules.html">Правила сообщества</a><a href="privacy.html">Политика конфиденциальности</a><a href="child-safety.html">Безопасность детей</a><a href="delete-account.html">Удаление аккаунта</a><a href="contact.html" aria-current="page">Написать в поддержку</a></nav></footer>
+<script src="contact.js" defer></script>
 </body>
 </html>

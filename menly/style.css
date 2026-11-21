@@ -36,3 +36,37 @@ footer nav { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
 footer a[aria-current="page"] { color: var(--text); }
 @media (max-width: 41rem) { .cards { grid-template-columns: 1fr; } }
 footer .contact { margin-top: .75rem; }
+
+.support-request summary, .support-request button {
+  width: fit-content;
+  border: 1px solid var(--accent);
+  border-radius: .75rem;
+  padding: .6rem 1rem;
+  background: var(--panel);
+  color: var(--accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.support-request summary:focus-visible, .support-request button:focus-visible,
+.support-request :is(input, select, textarea):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.support-request form {
+  display: grid;
+  gap: .6rem;
+  margin-top: 1.25rem;
+}
+.support-request :is(input, select, textarea) {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  background: var(--panel);
+  color: var(--text);
+  padding: .7rem .85rem;
+  font: inherit;
+  margin-bottom: .4rem;
+}
+.support-request textarea { resize: vertical; }
+.support-address { margin-top: 1rem; overflow-wrap: anywhere; }
