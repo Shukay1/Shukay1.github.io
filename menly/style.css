@@ -1,0 +1,38 @@
+:root {
+  color-scheme: dark;
+  --background: #101014;
+  --panel: #19191f;
+  --line: #36323e;
+  --text: #f6f3fa;
+  --muted: #c5bdcd;
+  --accent: #d9abff;
+  font: 1rem/1.65 system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--text); }
+a { color: var(--accent); text-underline-offset: .2em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+.wrap { width: min(100% - 2rem, 69rem); margin-inline: auto; }
+header { border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 0; color: var(--muted); text-decoration: none; }
+.brand img { width: 6rem; height: auto; }
+.hero { padding: clamp(3rem, 9vw, 6.5rem) 0 2.5rem; background: radial-gradient(ellipse at 80% 10%, #362045, transparent 58%); }
+h1, h2, p { margin: 0; }
+h1 { font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.04; letter-spacing: -.045em; overflow-wrap: anywhere; }
+.hero p { margin-top: 1rem; color: var(--muted); font-size: 1.125rem; }
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 1rem auto 4rem; }
+.card { display: grid; align-content: start; gap: .5rem; padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 1.2rem; background: var(--panel); text-decoration: none; }
+.card:hover { border-color: var(--accent); }
+.card strong { font-size: 1.25rem; }
+.card span { color: var(--muted); }
+.document { max-width: 48rem; padding-bottom: 4rem; }
+.document h1 { font-size: clamp(2rem, 5.5vw, 3.5rem); margin: 1.25rem 0 2rem; }
+.document section { padding: 1.25rem 0; border-top: 1px solid var(--line); }
+.document h2 { font-size: 1.25rem; margin-bottom: .4rem; }
+.document p { color: var(--muted); }
+.back { display: inline-block; margin-top: 2rem; }
+footer { border-top: 1px solid var(--line); padding: 1.25rem 0; color: var(--muted); }
+footer nav { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; }
+footer a[aria-current="page"] { color: var(--text); }
+@media (max-width: 41rem) { .cards { grid-template-columns: 1fr; } }
+footer .contact { margin-top: .75rem; }
