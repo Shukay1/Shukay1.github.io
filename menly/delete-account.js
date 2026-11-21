@@ -3,7 +3,8 @@ const firestore = 'https://firestore.googleapis.com/v1/projects/menly-67ec1/data
 const form = document.getElementById('deletion-form');
 const statusText = document.getElementById('deletion-status');
 const password = document.getElementById('deletion-password');
-const submit = form.querySelector('button');
+const buttons = [...form.querySelectorAll('button')];
+let inProgress = false;
 
 async function firebaseRequest(url, body, token) {
   const headers = {};
@@ -27,8 +28,14 @@ async function errorCode(response) {
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  if (submit.disabled) return;
-  submit.disabled = true;
+  if (inProgress) return;
+  const cancel = event.submitter?.value === 'cancel';
+  if (!cancel && !form.elements.confirmDeletion.checked) {
+    statusText.textContent = 'Подтвердите, что хотите запланировать удаление.';
+    return;
+  }
+  inProgress = true;
+  buttons.forEach(button => button.disabled = true);
   statusText.textContent = 'Отправляем запрос…';
 
   let step = 'Вход';
@@ -50,25 +57,45 @@ form.addEventListener('submit', async event => {
     if (typeof localId !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/.test(localId) || typeof idToken !== 'string' || !idToken) throw new Error('session');
     step = 'Запись запроса';
     const suffix = '/menlyDeletionRequests/' + localId;
-    const write = await firebaseRequest(firestore + ':commit', {writes: [{
-      update: {
-        name: 'projects/menly-67ec1/databases/(default)/documents' + suffix,
-        fields: {status: {stringValue: 'pending'}},
-      },
-      currentDocument: {exists: false},
-      updateTransforms: [{fieldPath: 'created', setToServerValue: 'REQUEST_TIME'}],
-    }]}, idToken);
-    if (!write.ok && !(await firebaseRequest(firestore + suffix, null, idToken)).ok) {
-      statusText.textContent = 'Запрос не сохранён (' + await errorCode(write) + ').';
+    const documentName = 'projects/menly-67ec1/databases/(default)/documents' + suffix;
+    const existing = await firebaseRequest(firestore + suffix, null, idToken);
+    if (!existing.ok && existing.status !== 404) {
+      statusText.textContent = 'Не удалось проверить запрос (' + await errorCode(existing) + ').';
+      return;
+    }
+    const previous = existing.ok ? (await existing.json()).fields?.status?.stringValue : null;
+    if (cancel && !previous) {
+      statusText.textContent = 'У аккаунта нет активного запроса на удаление.';
+      return;
+    }
+    if (!cancel && previous === 'scheduled') {
+      statusText.textContent = 'Удаление уже запланировано.';
+      return;
+    }
+    if (['processing','completed'].includes(previous)) {
+      statusText.textContent = 'Срок отмены удаления закончился.';
+      return;
+    }
+    const write = cancel
+      ? {delete: documentName, currentDocument: {exists: true}}
+      : {update: {name: documentName, fields: {status: {stringValue: 'scheduled'}}},
+         currentDocument: {exists: !!previous},
+         updateTransforms: [{fieldPath: 'created', setToServerValue: 'REQUEST_TIME'}]};
+    const result = await firebaseRequest(firestore + ':commit', {writes: [write]}, idToken);
+    if (!result.ok) {
+      statusText.textContent = 'Не удалось изменить запрос (' + await errorCode(result) + ').';
       return;
     }
     form.reset();
-    statusText.textContent = 'Запрос получен. Если понадобится уточнение, поддержка свяжется с вами по почте аккаунта.';
+    statusText.textContent = cancel
+      ? 'Удаление отменено. Вы снова можете войти в Menly.'
+      : 'Удаление запланировано. Отменить его можно в течение 90 дней.';
   } catch {
     statusText.textContent = step + ': не удалось получить ответ Firebase. Попробуйте ещё раз.';
   } finally {
     password.value = '';
-    submit.disabled = false;
+    inProgress = false;
+    buttons.forEach(button => button.disabled = false);
   }
 });
 form.hidden = false;
