@@ -9,8 +9,23 @@
 </head>
 <body>
 <header><div class="wrap"><a class="brand" href="index.html"><img src="wordmark.png" alt="Menly"><span>Поддержка</span></a></div></header>
-<main class="wrap document"><a class="back" href="index.html">Все разделы</a><h1>Удаление аккаунта</h1><section><h2>Запрос на удаление</h2><p>Приём запросов через сайт пока готовится. Здесь появится способ запросить удаление аккаунта и связанных данных.</p></section>
-<section><h2>Данные аккаунта</h2><p>Выход из аккаунта или удаление Menly с телефона оставляет данные, сохранённые на сервере.</p></section><section><h2>Вопросы об удалении</h2><p>Напишите в поддержку Menly на <a href="mailto:menly.support@gmail.com">menly.support@gmail.com</a>.</p></section></main>
+<main class="wrap document"><a class="back" href="index.html">Все разделы</a><h1>Удаление аккаунта</h1><section>
+<h2>Запросить удаление</h2>
+<p>Войдите с почтой и паролем Menly, чтобы подтвердить, что аккаунт принадлежит вам. Запрос будет обработан командой Menly.</p>
+<form id="deletion-form" class="deletion-form" method="post" hidden>
+<label for="deletion-email">Почта аккаунта</label>
+<input id="deletion-email" name="email" type="email" autocomplete="username" required>
+<label for="deletion-password">Пароль Menly</label>
+<input id="deletion-password" type="password" autocomplete="current-password" required>
+<label><input name="confirmDeletion" type="checkbox" required> Подтверждаю запрос на удаление аккаунта и связанных данных.</label>
+<button type="submit">Запросить удаление</button>
+<p id="deletion-status" role="status"></p>
+</form>
+<p>Если вы входили через Google или больше не можете войти в Menly, <a href="contact.html">напишите в поддержку</a>. Укажите почту аккаунта. Пароль и коды подтверждения в письмо добавлять не нужно.</p>
+</section>
+<section><h2>Что дальше</h2><p>До обработки запроса аккаунт остаётся доступным. Выход из Menly или удаление приложения с телефона сохраняет данные, которые уже находятся на сервере.</p></section>
+</main>
 <footer><nav class="wrap" aria-label="Документы Menly"><a href="community-rules.html">Правила сообщества</a><a href="privacy.html">Политика конфиденциальности</a><a href="child-safety.html">Безопасность детей</a><a href="delete-account.html" aria-current="page">Удаление аккаунта</a><a href="contact.html">Написать в поддержку</a></nav></footer>
+<script src="delete-account.js" defer></script>
 </body>
 </html>

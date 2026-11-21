@@ -122,3 +122,16 @@ footer .contact { margin-top: .75rem; }
 .help-empty { margin: 1.5rem 0; }
 .help-contact { padding: 1.4rem; background: var(--panel); border-radius: 1rem; }
 .help-contact a { display: inline-block; margin-top: .45rem; }
+
+.deletion-form { display: grid; gap: .65rem; margin: 1.25rem 0; }
+.deletion-form[hidden] { display: none; }
+.deletion-form :is(input[type="email"], input[type="password"], button) {
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  background: var(--panel);
+  color: var(--text);
+  padding: .7rem .85rem;
+  font: inherit;
+}
+.deletion-form button { width: fit-content; color: var(--accent); cursor: pointer; }
+.deletion-form button:disabled { cursor: wait; opacity: .65; }
