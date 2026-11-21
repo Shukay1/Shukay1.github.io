@@ -70,3 +70,55 @@ footer .contact { margin-top: .75rem; }
 }
 .support-request textarea { resize: vertical; }
 .support-address { margin-top: 1rem; overflow-wrap: anywhere; }
+
+.help-center [hidden] { display: none !important; }
+.help-hero { padding-bottom: 3rem; }
+.help-hero h1 { max-width: 16ch; }
+.help-search { max-width: 48rem; margin-top: 2rem; }
+.help-search label { display: block; margin-bottom: .5rem; font-weight: 650; }
+.help-search-row { display: flex; flex-wrap: wrap; gap: .65rem; }
+.help-search input {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: .9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
+.help-search button {
+  background: var(--panel);
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  padding: .65rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+.help-search :is(input, button):focus-visible, .help-article summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.help-search #help-status { margin-top: .7rem; font-size: 1rem; }
+.help-body { padding-bottom: 4rem; }
+.help-featured { margin: 1rem 0 3rem; }
+.help-featured div { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
+.help-featured a {
+  padding: .45rem .8rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: var(--panel);
+  text-decoration: none;
+}
+.help-body .cards { margin: 1rem 0 3rem; }
+.help-articles { max-width: 50rem; }
+.help-group { margin: 0 0 2.4rem; scroll-margin: 1rem; }
+.help-group h2 { margin-bottom: .65rem; }
+.help-article { border-top: 1px solid var(--line); scroll-margin: 1rem; }
+.help-article:last-child { border-bottom: 1px solid var(--line); }
+.help-article summary { font-weight: 600; padding: .85rem 0; cursor: pointer; }
+.help-article p { color: var(--muted); padding: 0 .5rem 1rem 1.2rem; }
+.help-empty { margin: 1.5rem 0; }
+.help-contact { padding: 1.4rem; background: var(--panel); border-radius: 1rem; }
+.help-contact a { display: inline-block; margin-top: .45rem; }
